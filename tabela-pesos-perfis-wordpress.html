@@ -1,0 +1,121 @@
+<div class="cfa-tp">
+<style>
+  .cfa-tp{
+    --cfa-bg:#eef1f5; --cfa-surface:#ffffff; --cfa-surface-2:#f4f6fa;
+    --cfa-ink:#14202f; --cfa-ink-soft:#465469; --cfa-ink-faint:#7b8798;
+    --cfa-line:#dde3ec; --cfa-line-strong:#c5cdda;
+    --cfa-gold:#b8860b; --cfa-gold-ink:#8a6508;
+    --cfa-radius:14px;
+    --cfa-shadow:0 1px 2px rgba(20,30,55,.06), 0 8px 28px rgba(20,30,55,.07);
+    --cfa-fdisplay:'Barlow Semi Condensed','Arial Narrow',sans-serif;
+    --cfa-fbody:'Inter',system-ui,sans-serif;
+    font-family:var(--cfa-fbody); color:var(--cfa-ink); line-height:1.5;
+    max-width:880px; margin:0 auto;
+  }
+  @media (prefers-color-scheme: dark){
+    .cfa-tp{
+      --cfa-bg:#0d1420; --cfa-surface:#141d2b; --cfa-surface-2:#1b2537;
+      --cfa-ink:#e8edf5; --cfa-ink-soft:#a4b0c2; --cfa-ink-faint:#74839a;
+      --cfa-line:#26324a; --cfa-line-strong:#38486a;
+      --cfa-gold:#d9b64e; --cfa-gold-ink:#e6c86e;
+      --cfa-shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.4);
+    }
+  }
+  .cfa-tp *{box-sizing:border-box}
+  .cfa-tp h2{font-family:var(--cfa-fdisplay);font-weight:700;font-size:clamp(22px,4vw,30px);
+    letter-spacing:-.01em;line-height:1.1;margin:0 0 10px}
+  .cfa-tp h2 .em{color:var(--cfa-gold-ink)}
+  .cfa-tp > p.cfa-intro{margin:0 0 20px;color:var(--cfa-ink-soft);font-size:15.5px;line-height:1.55}
+
+  .cfa-card{background:var(--cfa-surface);border:1px solid var(--cfa-line);border-radius:var(--cfa-radius);
+    box-shadow:var(--cfa-shadow);padding:20px 22px 24px}
+
+  .cfa-sec{display:flex;align-items:center;gap:9px;font-size:11px;font-weight:700;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--cfa-ink-faint);margin:22px 0 10px}
+  .cfa-sec:first-child{margin-top:0}
+  .cfa-sec::before{content:"";width:16px;height:2px;border-radius:1px;flex:none;
+    background:linear-gradient(90deg,var(--cfa-gold),transparent)}
+  .cfa-sec .cfa-count{margin-left:auto;font-weight:500;letter-spacing:0;text-transform:none;
+    color:var(--cfa-ink-faint)}
+
+  .cfa-twrap{overflow-x:auto;border:1px solid var(--cfa-line);border-radius:11px}
+  table.cfa-ptable{width:100%;border-collapse:collapse;font-size:14px}
+  .cfa-ptable thead th{text-align:left;font-size:10.5px;font-weight:700;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--cfa-ink-faint);background:var(--cfa-surface-2);
+    padding:10px 14px;border-bottom:1px solid var(--cfa-line-strong);white-space:nowrap}
+  .cfa-ptable th:not(:first-child),.cfa-ptable td:not(:first-child){text-align:right}
+  .cfa-ptable td{padding:11px 14px;border-bottom:1px solid var(--cfa-line);font-variant-numeric:tabular-nums}
+  .cfa-ptable tbody tr:last-child td{border-bottom:0}
+  .cfa-ptable td:first-child{font-family:var(--cfa-fdisplay);font-weight:600;font-size:15px;color:var(--cfa-ink)}
+  .cfa-ptable td.cfa-kg{color:var(--cfa-gold-ink);font-weight:700;font-family:var(--cfa-fdisplay);font-size:15.5px}
+
+  .cfa-note{margin-top:18px;font-size:11.5px;color:var(--cfa-ink-faint);line-height:1.5}
+  .cfa-note b{color:var(--cfa-ink-soft)}
+
+  @media(max-width:480px){
+    .cfa-card{padding:14px 14px 18px}
+    table.cfa-ptable{font-size:12.5px}
+    .cfa-ptable thead th{padding:8px 6px;font-size:8.5px;letter-spacing:.05em}
+    .cfa-ptable td{padding:9px 6px}
+    .cfa-ptable td:first-child{font-size:12.5px;line-height:1.25}
+    .cfa-ptable td.cfa-kg{font-size:14px}
+  }
+</style>
+
+<h2>Tabela de <span class="em">Pesos dos Perfis</span></h2>
+<p class="cfa-intro">Espessura, largura e peso por metro linear de cada perfil galvanizado utilizado no
+   quantificador de telhado da Cristófani Aço — organizados por tipo de peça, do mais leve ao mais reforçado.</p>
+
+<div class="cfa-card">
+
+  <div class="cfa-sec">Ripa <span class="cfa-count">1 item</span></div>
+  <div class="cfa-twrap">
+    <table class="cfa-ptable">
+      <thead><tr><th>Perfil</th><th>Espessura (mm)</th><th>Largura (m)</th><th>Peso (kg/m)</th></tr></thead>
+      <tbody>
+        <tr><td>Ripa 30x28x13 - 0,65mm</td><td>0,65</td><td>0,114</td><td class="cfa-kg">0,582</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cfa-sec">Caibro 70x40 <span class="cfa-count">3 itens</span></div>
+  <div class="cfa-twrap">
+    <table class="cfa-ptable">
+      <thead><tr><th>Perfil</th><th>Espessura (mm)</th><th>Largura (m)</th><th>Peso (kg/m)</th></tr></thead>
+      <tbody>
+        <tr><td>Caibro 70x40 - 0,60mm</td><td>0,60</td><td>0,24</td><td class="cfa-kg">1,130</td></tr>
+        <tr><td>Caibro 70x40 - 0,65mm</td><td>0,65</td><td>0,24</td><td class="cfa-kg">1,225</td></tr>
+        <tr><td>Caibro 70x40 - 0,80mm</td><td>0,80</td><td>0,24</td><td class="cfa-kg">1,507</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cfa-sec">Terça 125x60 <span class="cfa-count">3 itens</span></div>
+  <div class="cfa-twrap">
+    <table class="cfa-ptable">
+      <thead><tr><th>Perfil</th><th>Espessura (mm)</th><th>Largura (m)</th><th>Peso (kg/m)</th></tr></thead>
+      <tbody>
+        <tr><td>Terça 125x60 - 0,80mm</td><td>0,80</td><td>0,4</td><td class="cfa-kg">2,512</td></tr>
+        <tr><td>Terça 125x60 - 0,95mm</td><td>0,90</td><td>0,4</td><td class="cfa-kg">2,826</td></tr>
+        <tr><td>Terça 125x60 - 1,25mm</td><td>1,25</td><td>0,4</td><td class="cfa-kg">3,925</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cfa-sec">Viga 197x87 <span class="cfa-count">3 itens</span></div>
+  <div class="cfa-twrap">
+    <table class="cfa-ptable">
+      <thead><tr><th>Perfil</th><th>Espessura (mm)</th><th>Largura (m)</th><th>Peso (kg/m)</th></tr></thead>
+      <tbody>
+        <tr><td>Viga 197x87 - 0,95mm</td><td>0,95</td><td>0,6</td><td class="cfa-kg">4,475</td></tr>
+        <tr><td>Viga 197x87 - 1,25mm</td><td>1,25</td><td>0,6</td><td class="cfa-kg">5,888</td></tr>
+        <tr><td>Viga 197x87 - 1,55mm</td><td>1,55</td><td>0,6</td><td class="cfa-kg">7,301</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cfa-note"><b>Observação:</b> na Terça 125x60 - 0,95mm, a espessura efetiva usada no
+    cálculo de peso é 0,90mm, conforme a planilha técnica de origem.</div>
+
+</div>
+</div>
