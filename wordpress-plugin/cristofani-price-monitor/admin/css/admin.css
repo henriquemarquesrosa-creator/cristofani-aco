@@ -1,0 +1,19 @@
+.cpm-wrap .cpm-notice { margin: 12px 0; padding: 10px 14px; border-left: 4px solid #46b450; background: #fff; box-shadow: 0 1px 1px rgba(0,0,0,.04); }
+.cpm-wrap .cpm-notice.cpm-error { border-left-color: #dc3232; }
+.cpm-wrap table.cpm-table { border-collapse: collapse; width: 100%; background: #fff; margin-top: 10px; }
+.cpm-wrap table.cpm-table th, .cpm-wrap table.cpm-table td { padding: 8px 10px; border-bottom: 1px solid #e2e4e7; text-align: left; vertical-align: top; }
+.cpm-wrap table.cpm-table th { background: #f6f7f7; font-weight: 600; }
+.cpm-wrap .cpm-card { background: #fff; border: 1px solid #e2e4e7; border-radius: 6px; padding: 16px 18px; margin: 16px 0; max-width: 640px; }
+.cpm-wrap .cpm-card.cpm-wide { max-width: none; }
+.cpm-wrap .cpm-inline-form { display: inline; }
+.cpm-wrap .cpm-actions form { display: inline-block; margin-right: 6px; }
+.cpm-wrap .cpm-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 600; }
+.cpm-wrap .cpm-badge.pending { background: #fff3cd; color: #7a5b00; }
+.cpm-wrap .cpm-badge.sent { background: #d6e4ff; color: #1a3b8f; }
+.cpm-wrap .cpm-badge.received { background: #d7f3df; color: #14622f; }
+.cpm-wrap .cpm-draft { white-space: pre-wrap; background: #f6f7f7; border: 1px solid #e2e4e7; border-radius: 6px; padding: 10px 12px; margin: 8px 0; font-size: 13px; }
+.cpm-wrap .cpm-trend-up { color: #b32d2e; font-weight: 600; }
+.cpm-wrap .cpm-trend-down { color: #157a3e; font-weight: 600; }
+.cpm-wrap .cpm-trend-same { color: #666; }
+.cpm-wrap .cpm-cheapest { background: #d7f3df; }
+.cpm-wrap .cpm-hint { color: #666; font-size: 12.5px; margin: 4px 0 0; }
