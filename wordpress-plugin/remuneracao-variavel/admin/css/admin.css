@@ -1,0 +1,22 @@
+.rv-wrap .rv-notice { margin: 12px 0; padding: 10px 14px; border-left: 4px solid #46b450; background: #fff; box-shadow: 0 1px 1px rgba(0,0,0,.04); }
+.rv-wrap .rv-notice.rv-error { border-left-color: #dc3232; }
+.rv-wrap table.rv-table { border-collapse: collapse; width: 100%; background: #fff; margin-top: 10px; }
+.rv-wrap table.rv-table th, .rv-wrap table.rv-table td { padding: 8px 10px; border-bottom: 1px solid #e2e4e7; text-align: left; vertical-align: middle; }
+.rv-wrap table.rv-table th { background: #f6f7f7; font-weight: 600; }
+.rv-wrap table.rv-table td.num, .rv-wrap table.rv-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.rv-wrap .rv-card { background: #fff; border: 1px solid #e2e4e7; border-radius: 6px; padding: 16px 18px; margin: 16px 0; max-width: 760px; }
+.rv-wrap .rv-card.rv-wide { max-width: none; }
+.rv-wrap .rv-hint { color: #666; font-size: 12.5px; margin: 4px 0 0; }
+.rv-wrap .rv-stat { display: inline-block; background: #fff; border: 1px solid #e2e4e7; border-radius: 8px; padding: 14px 18px; margin: 0 12px 12px 0; min-width: 160px; }
+.rv-wrap .rv-stat .n { font-size: 26px; font-weight: 700; display: block; }
+.rv-wrap .rv-stat .l { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: .04em; }
+.rv-wrap .rv-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 600; }
+.rv-wrap .rv-badge.aberto { background: #fff3cd; color: #7a5b00; }
+.rv-wrap .rv-badge.fechado { background: #d7f3df; color: #14622f; }
+.rv-wrap .rv-pct-ok { color: #157a3e; font-weight: 600; }
+.rv-wrap .rv-pct-tier { color: #b8860b; font-weight: 600; }
+.rv-wrap .rv-pct-zero { color: #b32d2e; }
+.rv-wrap textarea.rv-paste { width: 100%; font-family: monospace; font-size: 12px; }
+.rv-wrap input.rv-num { width: 110px; text-align: right; }
+.rv-wrap .rv-override { width: 110px; text-align: right; background: #fffbe6; }
+.rv-wrap .rv-total { font-size: 20px; font-weight: 700; }
