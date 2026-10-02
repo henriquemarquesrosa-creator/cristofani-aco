@@ -39,6 +39,8 @@ class Rv_Db {
 			label VARCHAR(60) NOT NULL,
 			month1_start DATE NOT NULL,
 			status VARCHAR(20) NOT NULL DEFAULT 'aberto',
+			baseline_faturamento DECIMAL(12,2) NULL,
+			baseline_ativos INT NULL,
 			created_at DATETIME NOT NULL,
 			PRIMARY KEY  (id),
 			KEY month1_start (month1_start)

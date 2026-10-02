@@ -30,8 +30,7 @@ class Rv_Calculator {
 	}
 
 	/** @return array{month1:array{start:string,end:string,ym:string},month2:array,bimestre:array{start:string,end:string}} */
-	public static function cycle_months( $cycle ) {
-		$m1_start = $cycle->month1_start;
+	public static function cycle_months_from_start( $m1_start ) {
 		$m1_end   = date( 'Y-m-t', strtotime( $m1_start ) );
 		$m2_start = date( 'Y-m-01', strtotime( $m1_start . ' +1 month' ) );
 		$m2_end   = date( 'Y-m-t', strtotime( $m2_start ) );
@@ -43,13 +42,8 @@ class Rv_Calculator {
 		);
 	}
 
-	public static function get_previous_cycle( $cycle ) {
-		global $wpdb;
-		$table = Rv_Db::table( 'cycles' );
-		return $wpdb->get_row( $wpdb->prepare(
-			"SELECT * FROM $table WHERE month1_start < %s ORDER BY month1_start DESC LIMIT 1",
-			$cycle->month1_start
-		) );
+	public static function cycle_months( $cycle ) {
+		return self::cycle_months_from_start( $cycle->month1_start );
 	}
 
 	/* ---------------- client ledger analysis ---------------- */
@@ -187,14 +181,22 @@ class Rv_Calculator {
 		$limite_abertura = (float) $settings['limite_abertura'];
 		$limite_ativo    = (float) $settings['limite_ativo'];
 
-		$prev_cycle = self::get_previous_cycle( $cycle );
-		$prev_months = $prev_cycle ? self::cycle_months( $prev_cycle ) : null;
+		// Bimestre anterior: calculado sempre a partir da data (2 meses antes), direto dos
+		// lançamentos importados — não depende de existir um "ciclo" cadastrado pra ele.
+		$prev_m1_start = date( 'Y-m-01', strtotime( $months['month1']['start'] . ' -2 months' ) );
+		$prev_months   = self::cycle_months_from_start( $prev_m1_start );
 
-		$faturamento_atual   = self::faturamento_periodo( $months['bimestre']['start'], $months['bimestre']['end'] );
-		$faturamento_anterior = $prev_months ? self::faturamento_periodo( $prev_months['bimestre']['start'], $prev_months['bimestre']['end'] ) : 0.0;
+		$faturamento_atual        = self::faturamento_periodo( $months['bimestre']['start'], $months['bimestre']['end'] );
+		$faturamento_anterior_calc = self::faturamento_periodo( $prev_months['bimestre']['start'], $prev_months['bimestre']['end'] );
 
-		$ativos_atual    = self::clientes_ativos_periodo( $months['bimestre']['start'], $months['bimestre']['end'], $limite_ativo );
-		$ativos_anterior = $prev_months ? self::clientes_ativos_periodo( $prev_months['bimestre']['start'], $prev_months['bimestre']['end'], $limite_ativo ) : 0;
+		$ativos_atual         = self::clientes_ativos_periodo( $months['bimestre']['start'], $months['bimestre']['end'], $limite_ativo );
+		$ativos_anterior_calc = self::clientes_ativos_periodo( $prev_months['bimestre']['start'], $prev_months['bimestre']['end'], $limite_ativo );
+
+		// Se o histórico anterior não estiver todo importado no sistema, o ciclo pode ter uma
+		// base manual (digitada pelo admin a partir dos registros antigos) que prevalece sobre
+		// o cálculo automático.
+		$faturamento_anterior = null !== $cycle->baseline_faturamento ? (float) $cycle->baseline_faturamento : $faturamento_anterior_calc;
+		$ativos_anterior      = null !== $cycle->baseline_ativos ? (int) $cycle->baseline_ativos : $ativos_anterior_calc;
 
 		global $wpdb;
 		$table  = Rv_Db::table( 'targets' );
@@ -253,13 +255,16 @@ class Rv_Calculator {
 		$total = array_sum( wp_list_pluck( $result, 'valor_final' ) );
 
 		return array(
-			'months'               => $months,
-			'faturamento_atual'    => $faturamento_atual,
-			'faturamento_anterior' => $faturamento_anterior,
-			'ativos_atual'         => $ativos_atual,
-			'ativos_anterior'      => $ativos_anterior,
-			'rows'                 => $result,
-			'total'                => $total,
+			'months'                    => $months,
+			'faturamento_atual'         => $faturamento_atual,
+			'faturamento_anterior'      => $faturamento_anterior,
+			'faturamento_anterior_calc' => $faturamento_anterior_calc,
+			'ativos_atual'              => $ativos_atual,
+			'ativos_anterior'           => $ativos_anterior,
+			'ativos_anterior_calc'      => $ativos_anterior_calc,
+			'baseline_overridden'       => null !== $cycle->baseline_faturamento || null !== $cycle->baseline_ativos,
+			'rows'                      => $result,
+			'total'                     => $total,
 		);
 	}
 }

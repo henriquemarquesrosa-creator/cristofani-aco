@@ -5,8 +5,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Rv_Activator {
 
+	public static function maybe_upgrade() {
+		if ( get_option( 'rv_db_version' ) !== RV_VERSION ) {
+			Rv_Db::create_tables();
+			update_option( 'rv_db_version', RV_VERSION );
+		}
+	}
+
 	public static function activate() {
 		Rv_Db::create_tables();
+		update_option( 'rv_db_version', RV_VERSION );
 
 		if ( false === get_option( 'rv_settings' ) ) {
 			add_option( 'rv_settings', array(

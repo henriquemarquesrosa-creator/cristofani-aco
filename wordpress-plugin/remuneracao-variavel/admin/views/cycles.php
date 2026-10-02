@@ -61,10 +61,33 @@
 			<h2><?php echo esc_html( $cycle->label ); ?> <span class="rv-badge <?php echo esc_attr( $cycle->status ); ?>"><?php echo esc_html( $cycle->status ); ?></span></h2>
 			<p class="rv-hint">
 				Mês 1: <?php echo esc_html( date_i18n( 'M/Y', strtotime( $months['month1']['start'] ) ) ); ?> ·
-				Mês 2: <?php echo esc_html( date_i18n( 'M/Y', strtotime( $months['month2']['start'] ) ) ); ?> ·
-				Faturamento do bimestre anterior usado como base: R$ <?php echo number_format( $compute['faturamento_anterior'], 2, ',', '.' ); ?> ·
-				Clientes ativos no bimestre anterior: <?php echo (int) $compute['ativos_anterior']; ?>
+				Mês 2: <?php echo esc_html( date_i18n( 'M/Y', strtotime( $months['month2']['start'] ) ) ); ?>
 			</p>
+
+			<div class="rv-card" style="margin-left:0;margin-right:0;background:#fafafa">
+				<h3 style="margin-top:0">Base do bimestre anterior (usada no Crescimento)</h3>
+				<p class="rv-hint">
+					Calculado a partir dos lançamentos já importados para esse período:
+					faturamento R$ <?php echo number_format( $compute['faturamento_anterior_calc'], 2, ',', '.' ); ?>,
+					<?php echo (int) $compute['ativos_anterior_calc']; ?> cliente(s) ativo(s).
+					Se o relatório daquele bimestre ainda não foi importado, digite os valores reais abaixo pra sobrescrever —
+					fica valendo até você apagar o campo.
+				</p>
+				<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+					<?php wp_nonce_field( 'rv_save_baseline' ); ?>
+					<input type="hidden" name="action" value="rv_save_baseline">
+					<input type="hidden" name="cycle_id" value="<?php echo (int) $cycle->id; ?>">
+					<label>Faturamento do bimestre anterior: R$
+						<input type="text" class="rv-num" name="baseline_faturamento" value="<?php echo esc_attr( $cycle->baseline_faturamento ); ?>" placeholder="auto">
+					</label>
+					&nbsp;&nbsp;
+					<label>Clientes ativos no bimestre anterior:
+						<input type="text" class="rv-num" name="baseline_ativos" value="<?php echo esc_attr( $cycle->baseline_ativos ); ?>" placeholder="auto">
+					</label>
+					<button type="submit" class="button">Salvar base</button>
+				</form>
+				<p class="rv-hint">Usado agora: faturamento R$ <?php echo number_format( $compute['faturamento_anterior'], 2, ',', '.' ); ?>, <?php echo (int) $compute['ativos_anterior']; ?> cliente(s) ativo(s)<?php echo $compute['baseline_overridden'] ? ' (manual)' : ' (automático)'; ?>.</p>
+			</div>
 
 			<div class="rv-stat"><span class="n">R$ <?php echo number_format( $compute['total'], 2, ',', '.' ); ?></span><span class="l">Total do ciclo</span></div>
 			<div class="rv-stat"><span class="n">R$ <?php echo number_format( $compute['faturamento_atual'], 2, ',', '.' ); ?></span><span class="l">Faturamento do bimestre</span></div>

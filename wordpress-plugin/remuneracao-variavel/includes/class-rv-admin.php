@@ -13,7 +13,7 @@ class Rv_Admin {
 
 		$actions = array(
 			'rv_import_commit',
-			'rv_create_cycle', 'rv_save_targets', 'rv_close_cycle', 'rv_reopen_cycle', 'rv_delete_cycle',
+			'rv_create_cycle', 'rv_save_targets', 'rv_save_baseline', 'rv_close_cycle', 'rv_reopen_cycle', 'rv_delete_cycle',
 			'rv_save_settings',
 		);
 		foreach ( $actions as $action ) {
@@ -206,6 +206,21 @@ class Rv_Admin {
 		}
 
 		self::redirect( 'rv-cycles', array( 'id' => $cycle_id, 'rv_saved' => 1 ) );
+	}
+
+	public static function rv_save_baseline() {
+		self::guard( 'rv_save_baseline' );
+
+		$id  = (int) $_POST['cycle_id'];
+		$fat = trim( wp_unslash( $_POST['baseline_faturamento'] ?? '' ) );
+		$ati = trim( wp_unslash( $_POST['baseline_ativos'] ?? '' ) );
+
+		Rv_Db::update( 'cycles', $id, array(
+			'baseline_faturamento' => '' !== $fat ? (float) str_replace( ',', '.', $fat ) : null,
+			'baseline_ativos'      => '' !== $ati ? (int) $ati : null,
+		) );
+
+		self::redirect( 'rv-cycles', array( 'id' => $id, 'rv_saved' => 1 ) );
 	}
 
 	public static function rv_close_cycle() {
